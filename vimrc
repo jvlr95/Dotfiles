@@ -1,4 +1,6 @@
-    " Configurações gerais
+
+" Configurações gerais
+" -----------------------------------------------------------------------------
 filetype plugin indent on
 syntax on
 set title
@@ -29,8 +31,9 @@ set number
 set relativenumber
 set scrolloff=2
 set cursorline
-" set cursorcolumn
+set cursorcolumn
 " Folds
+" -----------------------------------------------------------------------------
 set foldmethod=syntax
 set foldlevel=99
 "-----------------------------------------------------------------------------
@@ -45,50 +48,27 @@ set tabstop=4
 set softtabstop=4
 set shiftwidth=2
 "-----------------------------------------------------------------------------
-" set ignorecase
 set smartcase
 set incsearch
 set hls
 let @/ = ""
-"-----------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 set complete+=kspell
 set completeopt=menuone,longest
 set shortmess+=c
-
+" -----------------------------------------------------------------------------
 set spelllang=pt_br,en
 set nospell
-
-" Insert completion...
-
-" -- Select with arrows up and down --
-inoremap <expr> <up> pumvisible() ? '<c-p>' : '<up>'
-inoremap <expr> <down> pumvisible() ? '<c-n>' : '<down>'
-
-" -- Accept with right arrow or enter --
-inoremap <expr> <right> pumvisible() ? '<c-y>' : '<right>'
-inoremap <expr> <cr> pumvisible() ? '<c-y>' : '<cr>'
-
-" -- Cancel completion with left arrow --
-inoremap <expr> <left> pumvisible() ? '<c-e>' : '<left>'
-
-function! Hashbangs()
-    let hb = ['#!/bin/bash', '#!/usr/bin/env bash', '#!/bin/sh', '#!/usr/bin/awk -f']
-    call complete(col('.'), hb)
-    return ''
-endfunction
-
-imap <c-x>h <c-r>=Hashbangs()<cr>
-"-----------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 set wildmenu
 set wildmode=longest,full
-" set wildoptions=pum
 "-----------------------------------------------------------------------------
 set noshowmode
 set laststatus=2
-
+" -----------------------------------------------------------------------------
 hi statusline   cterm=NONE ctermfg=0 ctermbg=7   guibg=#C1C2D0 guifg=#000000
 hi statuslinenc cterm=NONE ctermfg=0 ctermbg=240 guibg=#616270 guifg=#000000
-
+" -----------------------------------------------------------------------------
 augroup ModeEvents
     autocmd!
     au InsertEnter * hi statusline cterm=NONE ctermfg=0 ctermbg=10 guibg=#7BC86F
@@ -142,89 +122,32 @@ function! LoadStatusLine()
 endfunction
 
 call LoadStatusLine()
-
 " -----------------------------------------------------------------------------
 hi Normal guibg=NONE ctermbg=NONE
-
 hi CursorLine guibg=#202130
-
 hi Comment cterm=italic gui=italic
-
 hi VertSplit ctermbg=NONE guibg=NONE ctermfg=7 guifg=#c1c2d0
-
 hi TabLine      guifg=#9192a0 guibg=#303140 gui=none
 hi TabLineSel   guifg=#a1a2b0 guibg=#101120 gui=bold
 hi TabLineFill  guifg=#9192a0 guibg=#303140 gui=none
-
 hi Visual guifg=NONE guibg=#303140
 " -----------------------------------------------------------------------------
 source ~/.vim/themes/sonokai.vim
 " -----------------------------------------------------------------------------
-
 call plug#begin()
-" Interface e temas
-" Plug 'vim-airline/vim-airline'
-" Plug 'vim-airline/vim-airline-themes'
-" Plug 'ryanoasis/vim-devicons'
 " Gerenciamento de arquivos e navegação
-" Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Plug 'ervandew/supertab'
-Plug 'jiangmiao/auto-pairs'
-" Autocomplete e snippets
-Plug 'shougo/neocomplete.vim'
-Plug 'honza/vim-snippets'
-Plug 'garbas/vim-snipmate'
-Plug 'MarcWeber/vim-addon-mw-utils'
-Plug 'tomtom/tlib_vim'
-" Suporte a linguagem e frameworks
-" Plug 'scrooloose/syntastic'
-Plug 'sheerun/vim-polyglot'
+" Suporte a linguagem e frameworksPlug 'sheerun/vim-polyglot'
 Plug 'neovim/nvim-lspconfig'
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
-" Ferramenta de suporte css e html
-Plug 'mattn/emmet-vim'
-Plug 'ap/vim-css-color'
-" Autocomple para python
-Plug 'davidhalter/jedi-vim'
-" Javascript
-" Plug 'pangloss/vim-javascript'
-" Plug 'leafgarland/typescript-vim'
-" Plug 'peitalin/vim-jsx-typescript'
 " Ferramentas de desenvolvimento e utilidades
-Plug 'dense-analysis/ale'
 Plug 'preservim/nerdcommenter'
 call plug#end()
-
+" -----------------------------------------------------------------------------
 " COC
-let g:coc_global_extensions = ['coc-snippets', 'coc-python', 'coc-yaml', 'coc-html', 'coc-tsserver', 'coc-json', 'coc-css']
-
-
-" Python
-let g:ale_linters = {
-\   'python': ['flake8', 'pyright', 'bandit'],
-\}
-" Config flake8, linter, mensagens de erros e avisos
-let g:ale_python_flake8_options = '--max-line-length=100 --extend-ignore=E203'
-let g:ale_python_pyright_options = '--enable-type-checking'
-" Config black, analisador de formatação
-let g:ale_fixers = {
-\   '*': ['trim_whitespace'],
-\   'python': ['black', 'isort'],
-\}
-let g:ale_python_black_options = '--line-length 100'
-" Confg isort, analise de imports
-let g:ale_python_isort_options = '--profile black -l 100'
-
-" Configuração do ALE para JavaScript/React
-let g:ale_linters = {
-\   'javascript': ['eslint', 'tsserver'],
-\   'typescript': ['eslint', 'tsserver'],
-\   'javascriptreact': ['eslint', 'tsserver'],
-\   'typescriptreact': ['eslint', 'tsserver'],
-\ }
-
+let g:coc_global_extensions = ['coc-pairs', 'coc-snippets', 'coc-python', 'coc-yaml', 'coc-html', 'coc-tsserver', 'coc-json', 'coc-css']
+" -----------------------------------------------------------------------------
 " Key-maps
 nnoremap <C-q>q :quit<CR>
 nnoremap <C-s>w :w<CR>
@@ -244,7 +167,7 @@ map <C-a>n :bn<CR>
 map <C-a>p :bp<CR>
 map <C-a>c :bd<CR>
 " Executar Terminal
-map <C-t> :term<CR>
+map <C-t> :split term<CR>
 " Autoclose
 inoremap " ""<left>
 inoremap ' ''<left>
@@ -260,6 +183,8 @@ nnoremap <silent> <C-Down> :resize -10<CR>
 " Use Tab para autocompletar e Enter para confirmar
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<CR>"
+" -----------------------------------------------------------------------------
+" Coc Snippets 
 " Use <C-l> for trigger snippet expand.
 imap <C-l> <Plug>(coc-snippets-expand)
 " Use <C-j> for select text for visual placeholder of snippet.
@@ -271,5 +196,16 @@ let g:coc_snippet_prev = '<c-k>'
 " Use <C-j> for both expand and jump (make expand higher priority.)
 imap <C-j> <Plug>(coc-snippets-expand-jump)
 " Use <leader>x for convert visual selected code to snippet
-xmap <C-x>x  <Plug>(coc-convert-snippet)
+xmap <leader>x  <Plug>(coc-convert-snippet)
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? coc#_select_confirm() :
+      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
 
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+let g:coc_snippet_next = '<tab>'

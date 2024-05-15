@@ -102,7 +102,6 @@ function! LoadStatusLine()
         \}
 
     set statusline=\ %{toupper(g:currentmode[mode()])}
-    " set statusline=\ %{toupper(mode())}
     set statusline+=\ %{left_sep}
     set statusline+=\ %n
     set statusline+=\ %{left_sep}
@@ -144,54 +143,17 @@ if (has("nvim"))
     Plug 'nvim-lua/plenary.nvim'
     Plug 'nvim-telescope/telescope.nvim'
 endif
+" Autocomplete e snippets
+Plug 'honza/vim-snippets'
 " Suporte a linguagem e frameworks
-Plug 'sheerun/vim-polyglot'
 Plug 'neovim/nvim-lspconfig'
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
 " Ferramentas de desenvolvimento e utilidades
-" Plug 'dense-analysis/ale'
 Plug 'preservim/nerdcommenter'
 call plug#end()
 " -----------------------------------------------------------------------------
 " COC
-let g:coc_global_extensions = ['coc-snippets', 'coc-python', 'coc-yaml', 'coc-html', 'coc-tsserver', 'coc-json', 'coc-css', 'coc-pairs']
-" -----------------------------------------------------------------------------
-" Python
-" let g:ale_linters = {
-" \   'python': ['flake8', 'pyright', 'bandit'],
-" \}
-" " Config flake8, linter, mensagens de erros e avisos
-" let g:ale_python_flake8_options = '--max-line-length=100 --extend-ignore=E203'
-" let g:ale_python_pyright_options = '--enable-type-checking'
-" " Config black, analisador de formatação
-" let g:ale_fixers = {
-" \   '*': ['trim_whitespace'],
-" \   'python': ['black', 'isort'],
-" \}
-" let g:ale_python_black_options = '--line-length 100'
-" " Confg isort, analise de imports
-" let g:ale_python_isort_options = '--profile black -l 100'
-" -----------------------------------------------------------------------------
-" Configuração do ALE para JavaScript/React
-" let g:ale_linters = {
-" \   'javascript': ['eslint', 'tsserver'],
-" \   'typescript': ['eslint', 'tsserver'],
-" \   'javascriptreact': ['eslint', 'tsserver'],
-" \   'typescriptreact': ['eslint', 'tsserver'],
-" \ }
-" " Configuração do ALE para fixers em JavaScript/React e desenvolvimento web
-" let g:ale_fixers = {
-" \   'javascript': ['eslint'],
-" \   'typescript': ['eslint'],
-" \   'javascriptreact': ['eslint'],
-" \   'typescriptreact': ['eslint'],
-" \ }
-" " Opções do ESLint para JavaScript/React e desenvolvimento web
-" let g:ale_javascript_eslint_options = '--fix'
-" let g:ale_typescript_eslint_options = '--fix'
-" let g:ale_javascriptreact_eslint_options = '--fix'
-" let g:ale_typescriptreact_eslint_options = '--fix'
-
+let g:coc_global_extensions = ['coc-snippets', 'coc-python', 'coc-yaml', 'coc-html', 'coc-tsserver', 'coc-json', 'coc-css']
 " -----------------------------------------------------------------------------
 " Key-maps
 nnoremap <C-q>q :quit<CR>
@@ -262,3 +224,4 @@ endfunction
 
 let g:coc_snippet_next = '<tab>'
 " -----------------------------------------------------------------------------
+"

@@ -139,6 +139,7 @@ call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 " Suporte a linguagem e frameworksPlug 'sheerun/vim-polyglot'
+Plug 'sheerun/vim-polyglot'
 Plug 'neovim/nvim-lspconfig'
 Plug 'neoclide/coc.nvim' , { 'branch' : 'release' }
 " Ferramentas de desenvolvimento e utilidades
@@ -146,7 +147,7 @@ Plug 'preservim/nerdcommenter'
 call plug#end()
 " -----------------------------------------------------------------------------
 " COC
-let g:coc_global_extensions = ['coc-pairs', 'coc-snippets', 'coc-python', 'coc-yaml', 'coc-html', 'coc-tsserver', 'coc-json', 'coc-css']
+let g:coc_global_extensions = ['coc-snippets', 'coc-pyright', 'coc-jedi', 'coc-python', 'coc-yaml', 'coc-html', 'coc-tsserver', 'coc-react-refactor', 'coc-json', 'coc-css', 'coc-pairs']
 " -----------------------------------------------------------------------------
 " Key-maps
 nnoremap <C-q>q :quit<CR>
@@ -158,16 +159,16 @@ nmap <C-e>e :25Lex<CR>
 nmap <C-v>v :vsplit<CR>
 nmap <C-h>h :split <CR>
 " Pesquisa|FZF
-map <C-f>d :FZF<CR>
-map <C-f>t :Ag<CR>
+map <C-f>f :FZF<CR>
+map <C-f>g :Ag<CR>
+map <C-f>b :Buffers<CR>
 " buffers
-map <C-a>b :Buffers<CR>
 map <C-a>a :tab ball<CR>
 map <C-a>n :bn<CR>
 map <C-a>p :bp<CR>
 map <C-a>c :bd<CR>
 " Executar Terminal
-map <C-t> :split term<CR>
+map <C-t> :term<CR>
 " Autoclose
 inoremap " ""<left>
 inoremap ' ''<left>
@@ -209,3 +210,4 @@ function! s:check_back_space() abort
 endfunction
 
 let g:coc_snippet_next = '<tab>'
+" -----------------------------------------------------------------------------

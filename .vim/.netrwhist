@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =0
+let g:netrw_dirhist_0='/home/jrodrigues/work/Solinftec/scripts-infra/aws/kubernetes/apis-usa/solinftec-weather-api/k8s'
+let g:netrw_dirhist_9='/home/jrodrigues/work/Solinftec/scripts-infra/aws/kubernetes/apis-br'
+let g:netrw_dirhist_8='/home/jrodrigues/work/Solinftec/cda-api/k8s/overlays/br/development'
+let g:netrw_dirhist_7='/home/jrodrigues/work/Solinftec/cda-api/k8s/overlays/br'
+let g:netrw_dirhist_6='/home/jrodrigues/work/Solinftec/cda-api/k8s/overlays'
+let g:netrw_dirhist_5='/home/jrodrigues/work/Solinftec/cda-api/k8s'
+let g:netrw_dirhist_4='/home/jrodrigues/work/Solinftec/cda-api/k8s/base'
+let g:netrw_dirhist_3='/home/jrodrigues/work/Solinftec/cda-api/k8s'
+let g:netrw_dirhist_2='/home/jrodrigues/work/Solinftec/cda-api/k8s/base'
+let g:netrw_dirhist_1='/home/jrodrigues/work/Solinftec/cda-api/k8s'

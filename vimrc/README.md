@@ -78,8 +78,5 @@ The **Leader key** is a way of extending the power of VIM's shortcuts by using s
 | [cespare/vim-toml](https://github.com/cespare/vim-toml) | :white_check_mark: | | toml |
 | [hashivim/vim-vagrant](https://github.com/hashivim/vim-vagrant) | :white_check_mark: | | vagrant |
 | [stephpy/vim-yaml](https://github.com/stephpy/vim-yaml) | :white_check_mark: | | yaml |
-| [juneggun/fzf] (https://github.com/junegunn/fzf)  | :white_check_marK: | | fuzzy finder
-| [juneggun/fzf.vim] (https://github.com/junegunn/fzf.vim)  | :white_check_mark: | | fuzzy finder vim
-| [vim-scripts/c.vim] (https://github.com/vim-scripts/c.vim)    | : white_check_mark: | | c.vim
-
-<br>Made with :heart: for DevOps Engineers by DevOps Engineer
+| [juneggun/fzf](https://github.com/junegunn/fzf) | :white_check_mark: | | yaml |
+| [vim-scripts/c.vim](https://github.com/vim-scripts/c.vim) | :white_check_mark: | | yaml |

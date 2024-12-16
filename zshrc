@@ -60,19 +60,18 @@ alias workstation='distrobox enter workstation'
 
 # ASDF - Bash & Git
 . "$HOME/.asdf/asdf.sh"
+# append completions to fpath
+fpath=(${ASDF_DIR}/completions $fpath)
+# initialise completions with ZSH's compinit
+autoload -Uz compinit && compinit
+
+export PATH="$HOME/.asdf/shims:$HOME/.asdf/bin:$PATH"
+
 # Rust tools dir
 export PATH="$HOME/.cargo/bin:$PATH"
+
 # Bin local
 export PATH="$HOME/.local/bin:$PATH"
-# golang 
-export PATH=$PATH:~/.asdf/installs/golang/1.23.3/bin
-export PATH=$PATH:~/.asdf/installs/golang/1.23.3/packages/bin
-# python
-export PATH=$PATH:~/.asdf/installs/python/3.12.0/bin
-# java
-export PATH=$PATH:~/.asdf/installs/java/openjdk-23/bin
-# ruby
-export PATH=$PATH:~/.asdf/installs/ruby/
 
 # Kube Editor default
 export KUBE_EDITOR=vim

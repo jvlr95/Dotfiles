@@ -1,1 +1,0 @@
-/home/jrodrigues/vimrc/vimrc

@@ -1,0 +1,284 @@
+-- ============================================================
+-- PLUGINS (lazy.nvim)
+-- ============================================================
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({ "git", "clone", "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git", "--branch=stable", lazypath })
+end
+vim.opt.rtp:prepend(lazypath)
+
+require("lazy").setup({
+  -- Themes
+  { "joshdick/onedark.vim" },
+  { "sainnhe/sonokai" },
+
+  -- UI
+  { "preservim/nerdtree",                  cmd = { "NERDTree", "NERDTreeToggle", "NERDTreeFind", "NERDTreeFocus" } },
+  { "tiagofumo/vim-nerdtree-syntax-highlight", cmd = { "NERDTree", "NERDTreeToggle", "NERDTreeFind", "NERDTreeFocus" } },
+  { "xuyuanp/nerdtree-git-plugin",         cmd = { "NERDTree", "NERDTreeToggle", "NERDTreeFind", "NERDTreeFocus" } },
+  { "ryanoasis/vim-devicons" },
+  { "Yggdroot/indentLine",                 cmd = "IndentLinesToggle" },
+
+  -- LSP / Completion
+  { "neoclide/coc.nvim",                   branch = "release" },
+
+  -- Linting / Formatting
+  { "dense-analysis/ale" },
+  { "cappyzawa/trim.nvim" },
+
+  -- Editing
+  { "jiangmiao/auto-pairs" },
+  { "preservim/nerdcommenter" },
+
+  -- Git
+  { "airblade/vim-gitgutter",              cmd = "GitGutterEnable" },
+  { "tpope/vim-fugitive" },
+
+  -- Language support
+  { "andrewstuart/vim-kubernetes",         ft = { "yaml", "yml" } },
+  { "cespare/vim-toml",                    ft = "toml" },
+  { "chr4/nginx.vim",                      ft = "nginx" },
+  { "ekalinin/Dockerfile.vim",             ft = "dockerfile" },
+  { "fatih/vim-go",                        ft = "go" },
+  { "hashivim/vim-terraform",              ft = { "hcl", "terraform", "tf" } },
+  { "hashivim/vim-vagrant",                ft = { "vagrant" } },
+  { "pearofducks/ansible-vim",             ft = "ansible" },
+  { "plasticboy/vim-markdown",             ft = { "markdown", "md" } },
+  { "stephpy/vim-yaml",                    ft = { "yaml", "yml" } },
+  { "towolf/vim-helm",                     ft = "helm" },
+  { "vim-scripts/JSON.vim",               ft = "json" },
+
+  -- Search
+  { "junegunn/fzf",                        build = function() vim.fn["fzf#install"]() end },
+  { "junegunn/fzf.vim" },
+})
+
+-- ============================================================
+-- CLIPBOARD (OSC52 — funciona em SSH + tmux + Wayland/Konsole)
+-- ============================================================
+vim.g.clipboard = {
+  name = "OSC52",
+  copy = {
+    ["+"] = require("vim.ui.clipboard.osc52").copy("+"),
+    ["*"] = require("vim.ui.clipboard.osc52").copy("*"),
+  },
+  paste = {
+    ["+"] = require("vim.ui.clipboard.osc52").paste("+"),
+    ["*"] = require("vim.ui.clipboard.osc52").paste("*"),
+  },
+}
+
+-- ============================================================
+-- BASIC OPTIONS
+-- ============================================================
+vim.opt.termguicolors  = true
+vim.opt.background     = "dark"
+vim.opt.title          = true
+vim.opt.encoding       = "utf-8"
+vim.opt.mouse          = "a"
+vim.opt.clipboard      = "unnamedplus"
+vim.opt.hidden         = true
+vim.opt.confirm        = true
+vim.opt.splitbelow     = true
+vim.opt.splitright     = true
+vim.opt.path           = { ".", "**" }
+vim.opt.tags           = { "./tags", "tags;" .. vim.env.HOME }
+vim.opt.swapfile       = false
+vim.opt.backup         = false
+vim.opt.undofile       = true
+vim.opt.undodir        = vim.fn.expand("~/.config/nvim/undodir")
+
+vim.opt.wrap           = false
+vim.opt.linebreak      = true
+vim.opt.list           = false
+vim.opt.listchars      = { tab = "›-", space = "·", trail = "◀", eol = "↲" }
+
+vim.opt.number         = true
+vim.opt.scrolloff      = 2
+vim.opt.cursorline     = true
+vim.opt.cursorcolumn   = true
+
+vim.opt.foldmethod     = "syntax"
+vim.opt.foldlevel      = 99
+
+vim.opt.autoindent     = true
+vim.opt.smartindent    = true
+vim.opt.expandtab      = true
+vim.opt.tabstop        = 4
+vim.opt.softtabstop    = 4
+vim.opt.shiftwidth     = 4
+
+vim.opt.smartcase      = true
+vim.opt.incsearch      = true
+vim.opt.hlsearch       = true
+vim.opt.completeopt    = { "menuone", "longest" }
+vim.opt.shortmess:append("c")
+
+vim.opt.spelllang      = { "pt_br", "en" }
+vim.opt.spell          = false
+vim.opt.wildmenu       = true
+vim.opt.wildmode       = { "longest", "full" }
+vim.opt.wildoptions    = "pum"
+vim.opt.showmode       = false
+vim.opt.laststatus     = 2
+
+-- Cursor shape (insert = beam, normal = block)
+vim.opt.guicursor = "n-v-c:block,i-ci-ve:ver25,r-cr:hor20"
+
+-- Statusline colors
+vim.cmd([[
+  hi statusline   cterm=NONE ctermfg=0 ctermbg=7   guibg=#C1C2D0 guifg=#000000
+  hi statuslinenc cterm=NONE ctermfg=0 ctermbg=240 guibg=#616270 guifg=#000000
+]])
+
+-- Transparent background
+vim.cmd([[
+  highlight Normal guibg=NONE ctermbg=NONE
+  highlight EndOfBuffer guibg=NONE ctermbg=NONE
+]])
+
+-- ============================================================
+-- THEME
+-- ============================================================
+vim.g.sonokai_style                    = "andromeda"
+vim.g.sonokai_enable_italic            = 1
+vim.g.sonokai_disable_italic_comment   = 0
+vim.g.sonokai_diagnostic_line_highlight = 1
+vim.g.sonokai_current_word             = "bold"
+vim.cmd("colorscheme sonokai")
+
+-- ============================================================
+-- PLUGIN CONFIG
+-- ============================================================
+
+-- ALE
+vim.g.ale_fix_on_save = 1
+vim.g.ale_fixers = {
+  ["*"]         = { "remove_trailing_lines", "trim_whitespace" },
+  json          = { "jq" },
+  python        = { "black", "isort" },
+  sh            = { "shfmt" },
+  terraform     = { "terraform" },
+  yaml          = { "yamlfix" },
+}
+vim.g.ale_linters = {
+  ansible       = { "ansible-lint" },
+  dockerfile    = { "hadolint" },
+  python        = { "mypy", "pylint" },
+  sh            = { "shellcheck" },
+  terraform     = { "terraform", "tflint" },
+  yaml          = { "yamllint" },
+}
+vim.g.ale_python_black_executable    = "/opt/homebrew/bin/black"
+vim.g.ale_python_black_options       = "--skip-string-normalization"
+vim.g.ale_python_mypy_executable     = "/opt/homebrew/bin/mypy"
+
+-- Ansible
+vim.g.ansible_unindent_after_newline = 1
+vim.g.ansible_attribute_highlight    = "ob"
+vim.g.ansible_name_highlight         = "d"
+
+-- Terraform / HCL
+vim.g.hcl_align              = 1
+vim.g.terraform_align        = 1
+vim.g.terraform_fmt_on_save  = 1
+
+-- IndentLine
+vim.g.indentLine_enabled = 0
+vim.g.indentLine_char    = "┊"
+
+-- Markdown
+vim.g.vim_markdown_folding_disabled = 1
+
+-- NERDTree
+vim.g.NERDTreeMinimalUI          = 1
+vim.g.NERDTreeDirArrows          = 0
+vim.g.NERDTreeShowHidden         = 0
+vim.g.NERDTreeWinSize            = 30
+vim.g.NERDTreeShowBookmarks      = 1
+vim.g.NERDTreeAutoDeleteBuffer   = 1
+vim.g.NERDTreeRespectWildIgnore  = 1
+vim.g.NERDTreeIgnore             = {
+  "\\.git$", "\\.svn$", "\\.hg$", "\\.DS_Store$",
+  "\\.devcontainer$", "\\.vscode$", "__pycache__$",
+  "\\.terraform$", "\\.terraform\\.lock\\.hcl$",
+  "\\.terragrunt-cache$", "\\.pyc$",
+}
+
+-- WebDevIcons
+vim.g.WebDevIconsOS                        = "Darwin"
+vim.g.webdevicons_enable                   = 1
+vim.g.webdevicons_enable_nerdtree          = 1
+vim.g.WebDevIconsUnicodeDecorateFileNodes  = 1
+vim.g.webdevicons_conceal_nerdtree_brackets = 1
+vim.g.WebDevIconsUnicodeDecorateFolderNodes = 1
+
+-- ============================================================
+-- AUTOCMDS
+-- ============================================================
+local ag = vim.api.nvim_create_augroup
+local au = vim.api.nvim_create_autocmd
+
+-- Auto-reload init.lua on save
+ag("autosourcing", { clear = true })
+au("BufWritePost", { group = "autosourcing", pattern = "init.lua", command = "source %" })
+
+-- CoC: show documentation with K
+local function show_documentation()
+  local ft = vim.bo.filetype
+  if ft == "vim" or ft == "help" then
+    vim.cmd("h " .. vim.fn.expand("<cword>"))
+  elseif vim.fn["coc#rpc#ready"]() then
+    vim.fn.CocActionAsync("doHover")
+  else
+    vim.cmd("!" .. vim.o.keywordprg .. " " .. vim.fn.expand("<cword>"))
+  end
+end
+
+-- ============================================================
+-- KEYMAPS
+-- ============================================================
+local map = vim.keymap.set
+local opts = { silent = true }
+
+vim.g.mapleader = ","
+
+-- File explorer (NERDTree)
+map("n", "<C-e>e", ":NERDTreeToggle<CR>",  opts)  -- toggle NERDTree
+map("n", "<C-e>f", ":NERDTreeFind<CR>",    opts)  -- reveal file in NERDTree
+
+-- Search (FZF)
+map("n", "<C-f>d", ":FZF<CR>",  opts)  -- busca de arquivos
+map("n", "<C-f>t", ":Ag<CR>",   opts)  -- busca de texto (ripgrep/ag)
+
+-- IDE toggles
+map("n", "<C-g>",  ":GitGutterEnable<CR>", opts)   -- ativa git gutter
+map("n", "<C-d>",  ":below terminal<CR>",  opts)   -- abre terminal abaixo
+
+-- Buffer / tab navigation
+map("n", "<leader>t", ":tabnew<CR>",  opts)  -- nova aba
+map("n", "<leader>n", ":bnext<CR>",   opts)  -- próximo buffer
+map("n", "<leader>p", ":bprev<CR>",   opts)  -- buffer anterior
+
+-- CoC: navigation
+map("n", "gd", "<Plug>(coc-definition)",      opts)  -- vai para definição
+map("n", "gy", "<Plug>(coc-type-definition)", opts)  -- vai para tipo
+map("n", "gi", "<Plug>(coc-implementation)", opts)   -- vai para implementação
+map("n", "gr", "<Plug>(coc-references)",      opts)  -- referências
+map("n", "<leader>rn", "<Plug>(coc-rename)",      opts)  -- renomear símbolo
+map("n", "<leader>ca", "<Plug>(coc-codeaction)",  opts)  -- code action
+map("n", "K", show_documentation, opts)                  -- documentação
+
+-- CoC: completion
+map("i", "<C-Space>", "coc#refresh()", { silent = true, expr = true })
+map("i", "<CR>", [[pumvisible() ? coc#_select_confirm() : "\<C-g>u\<CR>\<C-r>=coc#on_enter()\<CR>"]],
+  { silent = true, expr = true })
+
+-- Git (fugitive)
+map("n", "<leader>gs", ":Git<CR>",         opts)  -- git status
+map("n", "<leader>gd", ":Gvdiffsplit<CR>", opts)  -- git diff (vertical)
+map("n", "<leader>gl", ":Gclog<CR>",       opts)  -- git log
+
+-- Quick toggles
+map("n", "<leader>i", ":IndentLinesToggle<CR>", opts)  -- toggle indent guides
